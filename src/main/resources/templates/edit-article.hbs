@@ -1,0 +1,20 @@
+{{#partial "content"}}
+    {{#if article}}
+        <div class="edit-entry">
+            <h2>Edit Entry</h2>
+    {{else}}
+        <div class="new-entry">
+            <h2>Publish New Entry</h2>
+    {{/if}}
+            <form action="/publish" method="post">
+                <label for="title">Title</label>
+                <input type="text" name="title"><br>
+                <label for="entry">Entry</label>
+                <textarea rows="5" name="entry"></textarea>
+                <input type="submit" value="{{#if article}}Publish Entry{{else}}Save Entry{{/if}}" class="button">
+                <a href="/" class="button button-secondary">Cancel</a>
+            </form>
+        </div>
+{{/partial}}
+
+{{> base.hbs}}

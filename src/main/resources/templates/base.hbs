@@ -1,0 +1,53 @@
+{{#block "header"}}
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{#block "title"}}Welcome to SparkBlog{{/block}}</title>
+        <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Noto+Sans:700,400" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/site.css">
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div class="site-header">
+                    <a class="logo" href="index">SparkBlog</a>
+                    <a class="new-entry button button-round" href="create-post"><i class="material-icons">create</i></a>
+                </div>
+            </div>
+        </header>
+        <section>
+            <div class="container">
+{{/block}}
+
+{{#block "content"}}
+                <div class="entry-list">
+                    {{#each articles}}
+                        <article>
+                            <h2><a href="{{ slug }}">{{ this.title }}</a></h2>
+                            <time datetime="{{ this.timeCreated }}">{{ this.timeCreatedFancy }}</time>
+                            <!--
+                                <time datetime="2016-01-31 1:00">January 31, 2016 at 1:00</time>
+                                this is what it looked like in the provided HTML example, will need to accommodate datetime
+                                attribute
+                                TODO: refactor so the template controls the formatting
+                            -->
+                        </article>
+                    {{/each}}
+                </div>
+{{/block}}
+
+{{#block "footer"}}
+            </div>
+        </section>
+        <footer>
+            <div>
+                <a href="#">Contact Us</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+                <a href="#">Terms</a>
+            </div>
+        </footer>
+    </body>
+    </html>
+{{/block}}
