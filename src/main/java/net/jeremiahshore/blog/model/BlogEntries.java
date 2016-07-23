@@ -26,7 +26,6 @@ public class BlogEntries {
                         LocalDateTime.of(2016, Month.JANUARY, 1, 13, 0)
                 )
         );
-        //TODO: add content for the other example entries once the date/time issue is sorted out
         entries.add(
                 new BlogEntry(
                         "The absolute worst day I’ve ever had",

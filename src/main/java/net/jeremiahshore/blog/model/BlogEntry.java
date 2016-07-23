@@ -30,6 +30,10 @@ public class BlogEntry {
         }
     }
 
+    public BlogEntry(String title, String text) {
+        new BlogEntry(title, text, LocalDateTime.now());
+    }
+
     /**** GETTERS ***/
     public String getTitle() {
         return title;
@@ -38,6 +42,10 @@ public class BlogEntry {
     public String getText() {
         //TODO: detect double carriage returns and insert opening/closing tags for paragraph elements
         return text;
+    }
+
+    public String getSlug() {
+        return slug;
     }
 
     public LocalDateTime getTimeCreated() {
