@@ -4,6 +4,7 @@ import com.github.slugify.Slugify;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,12 +23,7 @@ public class BlogEntry {
         this.text = text;
         this.timeCreated = timeCreated;
         this.comments = new HashSet<Comment>();
-        try {
-            Slugify slugify = new Slugify();
-            slug = slugify.slugify(title);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        updateSlug();
     }
 
     public BlogEntry(String title, String text) {
@@ -35,6 +31,7 @@ public class BlogEntry {
     }
 
     /**** GETTERS ***/
+
     public String getTitle() {
         return title;
     }
@@ -52,16 +49,37 @@ public class BlogEntry {
         return timeCreated;
     }
 
+    //TODO: let handlebars take care of the formatting and return the LocalDateTime in the implementation
+    public String getTimeStringShort() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return timeCreated.format(formatter);
+    }
+
+    public String getTimeStringLong() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d',' yyyy 'at' HH:mm");
+        return timeCreated.format(formatter);
+    }
+
     /**** SETTERS ****/
+
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void updateSlug() {
+        try {
+            Slugify slugify = new Slugify();
+            slug = slugify.slugify(title);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setText(String text) {
         this.text = text;
     }
 
-    public void setTimeCreated(LocalDateTime timeCreated) {
+    public void setTimeCreated(LocalDateTime timeCreated) { //used for editing? maybe remove?
         this.timeCreated = timeCreated;
     }
 
@@ -70,7 +88,8 @@ public class BlogEntry {
         return false;
     }
 
-    /**** OVERRIDDEN METHODS ****/
+    /**** OVERRIDES ****/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

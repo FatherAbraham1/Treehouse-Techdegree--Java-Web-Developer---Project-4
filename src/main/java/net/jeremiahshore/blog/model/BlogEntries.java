@@ -23,7 +23,7 @@ public class BlogEntries {
                                 "augue gravida lacus, non accumsan lorem odio id risus. Vestibulum pharetra tempor " +
                                 "molestie. Integer sollicitudin ante ipsum, a luctus nisi egestas eu. Cras accumsan " +
                                 "cursus ante, non dapibus tempor.",
-                        LocalDateTime.of(2016, Month.JANUARY, 1, 13, 0)
+                        LocalDateTime.of(2016, Month.JANUARY, 1, 1, 0)
                 )
         );
         entries.add(
@@ -34,7 +34,7 @@ public class BlogEntries {
                                 "landjaeger corned beef beef flank brisket tenderloin leberkas alcatra strip steak " +
                                 "cupim. Pastrami kielbasa sirloin landjaeger rump, shankle pork chop flank capicola " +
                                 "kevin beef andouille pork. Doner jerky turkey capicola short ribs alcatra.",
-                        LocalDateTime.of(2016, Month.JANUARY, 1, 13, 0)
+                        LocalDateTime.of(2016, Month.JANUARY, 1, 1, 0)
                 )
         );
         entries.add(
@@ -56,7 +56,7 @@ public class BlogEntries {
                                 "kielbasa porchetta prosciutto picanha turducken leberkas shankle cow drumstick " +
                                 "sausage. Frankfurter cow meatball, brisket pastrami turducken fatback t-bone sausage " +
                                 "jerky short loin tongue swine porchetta.",
-                        LocalDateTime.of(2016, Month.JANUARY, 1, 13, 0)
+                        LocalDateTime.of(2016, Month.JANUARY, 1, 1, 0)
                 )
         );
         entries.add(
@@ -75,7 +75,7 @@ public class BlogEntries {
                                 "Ham andouille turducken tail chicken brisket. Tri-tip prosciutto alcatra salami " +
                                 "shoulder doner kevin strip steak pork chuck, ball tip boudin pork belly turkey. " +
                                 "Beef meatball leberkas strip steak.",
-                        LocalDateTime.of(2016, Month.JANUARY, 1, 13, 0)
+                        LocalDateTime.of(2016, Month.JANUARY, 1, 1, 0)
                 )
         );
         return entries;
