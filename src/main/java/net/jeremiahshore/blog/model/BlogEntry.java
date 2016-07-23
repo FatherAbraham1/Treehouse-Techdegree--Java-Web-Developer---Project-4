@@ -5,8 +5,7 @@ import com.github.slugify.Slugify;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Jeremiah on 7/18/2016.
@@ -37,8 +36,13 @@ public class BlogEntry {
     }
 
     public String getText() {
-        //TODO: detect double carriage returns and insert opening/closing tags for paragraph elements
         return text;
+    }
+
+    public String[] getTextAsParagraphs() {
+        //TODO: (extra) use this in .hbs template to insert opening/closing tags for paragraph elements to correctly create separate paragraphs
+        String[] paragraphs = text.split("\\n\\n");
+        return paragraphs;
     }
 
     public String getSlug() {
@@ -49,7 +53,7 @@ public class BlogEntry {
         return timeCreated;
     }
 
-    //TODO: let handlebars take care of the formatting and return the LocalDateTime in the implementation
+    //TODO: (extra) let handlebars take care of the formatting and return the LocalDateTime in the implementation
     public String getTimeStringShort() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return timeCreated.format(formatter);

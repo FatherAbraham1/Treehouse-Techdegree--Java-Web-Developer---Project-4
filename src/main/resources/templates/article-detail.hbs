@@ -2,10 +2,10 @@
             <div class="entry-list single">
                 <article>
                     <h1>{{article.title}}</h1>
-                    <time datetime="{{ article.timeCreated }}">{{ article.timeCreatedFancy }}</time>
+                    <time datetime="{{ article.timeStringShort }}">{{ article.timeStringLong }}</time>
                     <div class="entry">
-                        {{article.text}}
-                        <p><a class="link" href="/edit">Edit Entry</a></p>
+                        <p>{{article.text}}</p>
+                        <p><a class="link" href="/{{ article.slug }}/edit">Edit Entry</a></p>
                     </div>
                 </article>
             </div>
