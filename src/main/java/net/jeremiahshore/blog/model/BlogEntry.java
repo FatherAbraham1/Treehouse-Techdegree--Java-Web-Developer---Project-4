@@ -3,7 +3,7 @@ package net.jeremiahshore.blog.model;
 import com.github.slugify.Slugify;
 
 import java.io.IOException;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,10 +14,10 @@ public class BlogEntry {
     private String slug;
     private String title;
     private String text;
-    private Date timeCreated;
+    private LocalDateTime timeCreated;
     private Set<Comment> comments;
 
-    public BlogEntry(String title, String text, Date timeCreated) {
+    public BlogEntry(String title, String text, LocalDateTime timeCreated) {
         this.title = title;
         this.text = text;
         this.timeCreated = timeCreated;
@@ -40,7 +40,7 @@ public class BlogEntry {
         return text;
     }
 
-    public Date getTimeCreated() {
+    public LocalDateTime getTimeCreated() {
         return timeCreated;
     }
 
@@ -53,7 +53,7 @@ public class BlogEntry {
         this.text = text;
     }
 
-    public void setTimeCreated(Date timeCreated) {
+    public void setTimeCreated(LocalDateTime timeCreated) {
         this.timeCreated = timeCreated;
     }
 
