@@ -2,7 +2,7 @@
     <div class="entry-list">
     {{#each blogEntries}}
         <article>
-            <h2><a href="{{ this.slug }}">{{ this.title }}</a></h2>
+            <h2><a href="/index/{{ this.slug }}">{{ this.title }}</a></h2>
             <time datetime="{{ this.timeStringShort }}">{{ this.timeStringLong }}</time>
         </article>
     {{/each}}

@@ -1,11 +1,11 @@
 {{#partial "content"}}
             <div class="entry-list single">
                 <article>
-                    <h1>{{article.title}}</h1>
-                    <time datetime="{{ article.timeStringShort }}">{{ article.timeStringLong }}</time>
+                    <h1>{{entry.title}}</h1>
+                    <time datetime="{{ entry.timeStringShort }}">{{ entry.timeStringLong }}</time>
                     <div class="entry">
-                        <p>{{article.text}}</p>
-                        <p><a class="link" href="/{{ article.slug }}/edit">Edit Entry</a></p>
+                        <p>{{entry.text}}</p>
+                        <p><a class="link" href="{{ entry.slug }}/edit">Edit Entry</a></p>
                     </div>
                 </article>
             </div>

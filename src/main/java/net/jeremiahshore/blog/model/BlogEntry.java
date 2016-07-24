@@ -25,10 +25,6 @@ public class BlogEntry {
         updateSlug();
     }
 
-    public BlogEntry(String title, String text) {
-        new BlogEntry(title, text, LocalDateTime.now());
-    }
-
     /**** GETTERS ***/
 
     public String getTitle() {
@@ -68,6 +64,7 @@ public class BlogEntry {
 
     public void setTitle(String title) {
         this.title = title;
+        updateSlug();
     }
 
     public void updateSlug() {

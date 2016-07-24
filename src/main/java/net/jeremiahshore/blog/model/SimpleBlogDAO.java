@@ -28,6 +28,6 @@ public class SimpleBlogDAO implements BlogDAO{
         return blogEntries.stream()
                 .filter(entry -> entry.getSlug().equals(slug))
                 .findFirst()
-                .orElseThrow(EntryNotFoundException::new);
+                .orElseThrow(NotFoundException::new);
     }
 }
