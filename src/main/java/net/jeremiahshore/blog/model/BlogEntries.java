@@ -9,34 +9,36 @@ import java.util.Set;
  * Created by Jeremiah on 7/20/2016.
  */
 public class BlogEntries {
-    protected static Set<BlogEntry> load() {
+    public static Set<BlogEntry> load() {
         Set<BlogEntry> entries = new HashSet<BlogEntry>();
-        entries.add(
-                new BlogEntry(
-                        "The best day I’ve ever had",
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut rhoncus felis, vel tincidunt " +
-                                "neque. Vestibulum ut metus eleifend, malesuada nisl at, scelerisque sapien. Vivamus " +
-                                "pharetra massa libero, sed feugiat turpis efficitur at.\n\n" +
-                                "Cras egestas ac ipsum in posuere. Fusce suscipit, libero id malesuada placerat, orci " +
-                                "velit semper metus, quis pulvinar sem nunc vel augue. In ornare tempor metus, sit " +
-                                "amet congue justo porta et. Etiam pretium, sapien non fermentum consequat, dolor " +
-                                "augue gravida lacus, non accumsan lorem odio id risus. Vestibulum pharetra tempor " +
-                                "molestie. Integer sollicitudin ante ipsum, a luctus nisi egestas eu. Cras accumsan " +
-                                "cursus ante, non dapibus tempor.",
-                        LocalDateTime.of(2016, Month.JANUARY, 1, 1, 0)
-                )
-        );
-        entries.add(
-                new BlogEntry(
+
+        BlogEntry entryWithComment = new BlogEntry(
+                "The best day I’ve ever had",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut rhoncus felis, vel tincidunt " +
+                        "neque. Vestibulum ut metus eleifend, malesuada nisl at, scelerisque sapien. Vivamus " +
+                        "pharetra massa libero, sed feugiat turpis efficitur at.\n\n" +
+                        "Cras egestas ac ipsum in posuere. Fusce suscipit, libero id malesuada placerat, orci " +
+                        "velit semper metus, quis pulvinar sem nunc vel augue. In ornare tempor metus, sit " +
+                        "amet congue justo porta et. Etiam pretium, sapien non fermentum consequat, dolor " +
+                        "augue gravida lacus, non accumsan lorem odio id risus. Vestibulum pharetra tempor " +
+                        "molestie. Integer sollicitudin ante ipsum, a luctus nisi egestas eu. Cras accumsan " +
+                        "cursus ante, non dapibus tempor.",
+                LocalDateTime.of(2016, Month.JANUARY, 1, 1, 0));
+        entryWithComment.addComment(new Comment("Jeremiah", "It really was pretty awesome!", LocalDateTime.now()));
+        entries.add(entryWithComment);
+
+        BlogEntry entryWithTwoComments = new BlogEntry(
                         "The absolute worst day I’ve ever had",
                         "Bacon ipsum dolor amet cupim hamburger venison, sausage rump short ribs flank kevin " +
                                 "pancetta bacon pig ball tip bresaola turkey pork loin. Pastrami andouille prosciutto " +
                                 "landjaeger corned beef beef flank brisket tenderloin leberkas alcatra strip steak " +
                                 "cupim. Pastrami kielbasa sirloin landjaeger rump, shankle pork chop flank capicola " +
                                 "kevin beef andouille pork. Doner jerky turkey capicola short ribs alcatra.",
-                        LocalDateTime.of(2016, Month.JANUARY, 1, 1, 0)
-                )
-        );
+                        LocalDateTime.of(2016, Month.JANUARY, 1, 1, 0));
+        entryWithTwoComments.addComment(new Comment("Craig", "Yeah, that really was the pits", LocalDateTime.of(2016, Month.JANUARY, 10, 5, 0)));
+        entryWithTwoComments.addComment(new Comment("Rama", "Doesn't sound that bad to me lol", LocalDateTime.of(2016, Month.JANUARY, 12, 16, 0)));
+        entries.add(entryWithTwoComments);
+
         entries.add(
                 new BlogEntry(
                         "That time at the mall",
@@ -57,8 +59,8 @@ public class BlogEntries {
                                 "sausage. Frankfurter cow meatball, brisket pastrami turducken fatback t-bone sausage " +
                                 "jerky short loin tongue swine porchetta.",
                         LocalDateTime.of(2016, Month.JANUARY, 1, 1, 0)
-                )
-        );
+                ));
+
         entries.add(
                 new BlogEntry(
                         "Dude, where’s my car?",
@@ -76,8 +78,8 @@ public class BlogEntries {
                                 "shoulder doner kevin strip steak pork chuck, ball tip boudin pork belly turkey. " +
                                 "Beef meatball leberkas strip steak.",
                         LocalDateTime.of(2016, Month.JANUARY, 1, 1, 0)
-                )
-        );
+                ));
+
         return entries;
     }
 }

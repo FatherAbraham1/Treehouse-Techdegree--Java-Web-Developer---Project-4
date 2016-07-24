@@ -1,7 +1,6 @@
 package net.jeremiahshore.blog.model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * Created by Jeremiah on 7/18/2016.
@@ -9,17 +8,27 @@ import java.util.Date;
 public class Comment {
     private String author;
     private String text;
-    private LocalDateTime timeCreated;
+    private LocalDateTime dateTimeCreated;
 
-    public Comment(String author, String text, LocalDateTime timeCreated) {
+    public Comment(String author, String text, LocalDateTime dateTimeCreated) {
         this.author = author;
         this.text = text;
-        this.timeCreated = timeCreated;
+        this.dateTimeCreated = dateTimeCreated;
     }
 
-    public Comment(String author, String text) {
-        new Comment(author, text, LocalDateTime.now());
+    public String getAuthor() {
+        return author;
     }
 
+    public String getText() {
+        return text;
+    }
 
+    public String getTimeStringShort() {
+        return TimeFormatHelper.shortFormat(dateTimeCreated);
+    }
+
+    public String getTimeStringLong() {
+        return TimeFormatHelper.longFormat(dateTimeCreated);
+    }
 }
