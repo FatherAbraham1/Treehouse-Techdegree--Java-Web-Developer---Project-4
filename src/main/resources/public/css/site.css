@@ -7,8 +7,14 @@ body {
 	background: url(../../concepts/JavaTechdegree_SparkBlog_1.jg) top center no-repeat;
 	font-size: 15px;
 	color: #000;
-	font-family: 'Noto Serif', Georgia, serif;
-	background: #444;
+	font-family: Roboto, 'Noto Serif', Georgia, serif;
+    background: gray;
+    padding-top: 40px;
+}
+.wrapper {
+    width: 60%;
+    margin: auto;
+    box-shadow: 0px 0px 30px #333;
 }
 .container {
 	margin: 0 auto;
@@ -21,9 +27,9 @@ header .site-header {
 	height: 95px;
 }
 header .logo {
-	border: 5px solid #000;
+	border: 5px solid #5cb5c1;
 	text-decoration: none;
-	color: #000;
+	color: #fff;
 	font-size: 21px;
 	font-weight: bold;
 	padding: 5px 10px;
@@ -31,6 +37,7 @@ header .logo {
 	float: left;
 	text-transform: uppercase;
 	font-family: 'Noto Sans', sans-serif;
+	background-color: #5cb5c1;
 }
 header .new-entry {
 	float: right;
@@ -59,8 +66,8 @@ footer a {
 .button {
 	padding: 8px 12px 7px 12px;
 	text-transform: uppercase;
-	background: #000;
-	border: 3px solid #000;
+	background: #5cb5c1;
+	border: 3px solid #5cb5c1;
 	border-radius: 4px;
 	text-decoration: none;
 	color: #FFF;
@@ -70,8 +77,8 @@ footer a {
 }
 .button.button-secondary {
 	background: transparent;
-	border-color: #000;
-	color: #000;
+    border-color: #5cb5c1;
+    color: #5cb5c1;
 }
 .button.button-round {
 	border-radius: 100px;
@@ -152,13 +159,16 @@ a.link {
 }
 .entry-list article a {
 	text-decoration: none;
-	color: #000;
+	color: #5cb5c1;
 }
 .entry-list time {
 	color: #888;
 }
 .entry-list.single {
 	padding-bottom: 30px;
+}
+.entry-list h1 {
+    color: #5cb5c1;
 }
 .entry-list.single time {
 	font-size: 18px;
