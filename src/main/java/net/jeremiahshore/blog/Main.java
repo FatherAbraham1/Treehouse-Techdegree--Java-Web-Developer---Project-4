@@ -26,34 +26,42 @@ public class Main {
         /**** PASSWORD & AUTHENTICATION ****/
 
         before((req, res) -> {
+            //persistent password cookie
             if (req.cookie("password") != null) {
                 req.attribute("password", req.cookie("password"));
+            }
+            //persistent destination cookie
+            if (req.cookie("destination") != null) {
+                req.attribute("destination", req.cookie("destination"));
             }
         });
 
         //pages where a password check is required
         before("/new", (req, res) -> {
-            res.redirect("/password");
+            res.cookie("destination", req.pathInfo());
+            if (req.attribute("password") == null || !req.attribute("password").equals("admin")) {
+                res.redirect("/password");
+            }
         });
 
         before("/index/:slug/edit", (req, res) -> {
-            res.redirect("/password");
+            res.cookie("destination", req.pathInfo());
+            //TODO: allow redirect to original destination (works on /new)
+            if (req.attribute("password") == null || !req.attribute("password").equals("admin")) {
+                res.redirect("/password");
+            }
         });
 
         //password input page
         get("/password", (req,res) -> {
-            if (req.attribute("password") != null
-                    && req.attribute("password").equals("admin")) {
-                    //TODO: redirect to the oringally requested destination
-            }
             return new ModelAndView(null, "password.hbs");
         }, new HandlebarsTemplateEngine());
 
         //password submission
-        post("/password/submit", (req, res) -> {
+        post("/sign-in", (req, res) -> {
             String password = req.queryParams("password");
             res.cookie("password", password);
-            //TODO: redirect to the oringally requested destination
+            res.redirect(req.attribute("destination"));
             return null;
         });
 
