@@ -1,12 +1,14 @@
 package net.jeremiahshore.blog.model;
 
+import net.jeremiahshore.blog.model.dao.BlogDAO;
+
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by Jeremiah on 7/22/2016.
  */
-public class SimpleBlogDAO implements BlogDAO{
+public class SimpleBlogDAO implements BlogDAO {
     private Set<BlogEntry> blogEntries;
 
     public SimpleBlogDAO() {
@@ -29,5 +31,10 @@ public class SimpleBlogDAO implements BlogDAO{
                 .filter(entry -> entry.getSlug().equals(slug))
                 .findFirst()
                 .orElseThrow(NotFoundException::new);
+    }
+
+    @Override
+    public boolean remove(BlogEntry entry) {
+        return blogEntries.remove(entry);
     }
 }

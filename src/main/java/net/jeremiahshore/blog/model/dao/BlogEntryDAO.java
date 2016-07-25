@@ -1,4 +1,7 @@
-package net.jeremiahshore.blog.model;
+package net.jeremiahshore.blog.model.dao;
+
+import net.jeremiahshore.blog.model.Comment;
+import net.jeremiahshore.blog.model.Tag;
 
 import java.util.Set;
 
@@ -13,4 +16,6 @@ public interface BlogEntryDAO {
     void updateText(String newText);
 
     Set<Comment> getComments();
+
+    Set<Tag> getTags();
 }

@@ -7,7 +7,8 @@
                 <label for="entry">Entry</label>
                 <textarea rows="5" name="entry">{{entry.text}}</textarea>
                 <input type="submit" value="Save Entry" class="button">
-                <a href="/" class="button button-secondary">Cancel</a>
+                <a href="/index/{{entry.slug}}" class="button button-secondary">Cancel</a>
+                <a href="delete" class="button button-warning">Delete Entry</a>
             </form>
         </div>
 {{/partial}}

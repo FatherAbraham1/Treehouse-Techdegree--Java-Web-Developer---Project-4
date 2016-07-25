@@ -15,12 +15,14 @@ public class BlogEntry {
     private String text;
     private LocalDateTime dateTimeCreated;
     private Set<Comment> comments;
+    private Set<Tag> tags;
 
     public BlogEntry(String title, String text, LocalDateTime dateTimeCreated) {
         this.title = title;
         this.text = text;
         this.dateTimeCreated = dateTimeCreated;
-        this.comments = new HashSet<Comment>();
+        this.comments = new HashSet<>();
+        this.tags = new HashSet<>();
         updateSlug();
     }
 
@@ -46,6 +48,10 @@ public class BlogEntry {
         return TimeFormatHelper.longFormat(dateTimeCreated);
     }
 
+    protected Set<Tag> getTags() {
+        return tags;
+    }
+
     protected Set<Comment> getComments() {
         return comments;
     }
@@ -62,8 +68,11 @@ public class BlogEntry {
     }
 
     protected boolean addComment(Comment comment) {
-        comments.add(comment);
-        return false;
+        return comments.add(comment);
+    }
+
+    protected boolean addTag(String tag) {
+        return tags.add(new Tag(tag));
     }
 
     /**** HELPERS ****/
@@ -91,17 +100,17 @@ public class BlogEntry {
         if (text != null ? !text.equals(blogEntry.text) : blogEntry.text != null) return false;
         if (dateTimeCreated != null ? !dateTimeCreated.equals(blogEntry.dateTimeCreated) : blogEntry.dateTimeCreated != null)
             return false;
-        return comments != null ? comments.equals(blogEntry.comments) : blogEntry.comments == null;
+        if (comments != null ? !comments.equals(blogEntry.comments) : blogEntry.comments != null) return false;
+        return tags != null ? tags.equals(blogEntry.tags) : blogEntry.tags == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = slug != null ? slug.hashCode() : 0;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (text != null ? text.hashCode() : 0);
-        result = 31 * result + (dateTimeCreated != null ? dateTimeCreated.hashCode() : 0);
-        result = 31 * result + (comments != null ? comments.hashCode() : 0);
+        int result = dateTimeCreated != null ? dateTimeCreated.hashCode() : 0;
+        result = 31 * result + (tags != null ? tags.hashCode() : 0);
         return result;
+        //TODO: add a unique ID to this class, use when loading entries at startup
+        //the hashcode as it was previously with title, text, comments was not allowing removal from the "model" because the returned hashcode had changed
     }
 }

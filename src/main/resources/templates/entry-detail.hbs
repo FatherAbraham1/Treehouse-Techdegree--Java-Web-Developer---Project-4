@@ -3,6 +3,11 @@
                 <article>
                     <h1>{{entry.title}}</h1>
                     <time datetime="{{ entry.timeStringShort }}">{{ entry.timeStringLong }}</time>
+                    <ul class="tags">
+                        {{#each tags}}
+                            <li>{{this.text}}</li>
+                        {{/each}}
+                    </ul>
                     <div class="entry">
                         <p>{{entry.text}}</p>
                         <p><a class="link" href="{{ entry.slug }}/edit">Edit Entry</a></p>
@@ -30,8 +35,6 @@
                     <input type="submit" value="Post Comment" class="button">
                 </form>
             </div>
-        </div>
-    </section>
 {{/partial}}
 
 {{> base.hbs}}

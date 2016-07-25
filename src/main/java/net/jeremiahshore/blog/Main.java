@@ -1,6 +1,7 @@
 package net.jeremiahshore.blog;
 
 import net.jeremiahshore.blog.model.*;
+import net.jeremiahshore.blog.model.dao.BlogEntryDAO;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -46,7 +47,7 @@ public class Main {
 
         before("/index/:slug/edit", (req, res) -> {
             res.cookie("destination", req.pathInfo());
-            //TODO: allow redirect to original destination (works on /new)
+            //TODO: (extra) allow redirect to original destination (works on /new)
             if (req.attribute("password") == null || !req.attribute("password").equals("admin")) {
                 res.redirect("/password");
             }
@@ -61,7 +62,11 @@ public class Main {
         post("/sign-in", (req, res) -> {
             String password = req.queryParams("password");
             res.cookie("password", password);
-            res.redirect(req.attribute("destination"));
+            if (req.attribute("destination") != null) {
+                res.redirect(req.attribute("destination"));
+            } else {
+                res.redirect("/");
+            }
             return null;
         });
 
@@ -72,14 +77,16 @@ public class Main {
             return null;
         });
 
+        //"home" page
         get("/index", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("blogEntries", blogDAO.findAll());
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
-        /**** ENTRY DETAIL ****/
+        /**** ENTRIES ****/
 
+        //detail page
         get("/index/:slug", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             BlogEntry entry = blogDAO.findBySlug(req.params("slug"));
@@ -87,15 +94,18 @@ public class Main {
             SimpleBlogEntryDAO entryDAO = new SimpleBlogEntryDAO(entry);
             Set<Comment> comments = entryDAO.getComments();
             model.put("comments", comments);
+            //TODO: (extra) add ability for admin user to add or remove tags on new or existing entries
+            Set<Tag> tags = entryDAO.getTags();
+            model.put("tags", tags);
             return new ModelAndView(model, "entry-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
-        /**** ENTRY CREATION ****/
-
+        //create new entry
         get("/new", (req, res) -> {
             return new ModelAndView(null, "new-entry.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //submit new entry
         post("/publish", (req, res) -> {
             String title = req.queryParams("title");
             String text = req.queryParams("entry");
@@ -104,8 +114,9 @@ public class Main {
             return null;
         });
 
-        /**** ENTRY EDITING ****/
+        /**** ENTRY CHANGES ****/
 
+        //edit entry page
         get("/index/:slug/edit", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             BlogEntry entry = blogDAO.findBySlug(req.params("slug"));
@@ -113,6 +124,7 @@ public class Main {
             return new ModelAndView(model, "edit-entry.hbs");
         }, new HandlebarsTemplateEngine());
 
+        //save changes after editing
         post("/index/:slug/edit/save", (req, res) -> {
             String newTitle = req.queryParams("title");
             String newText = req.queryParams("entry");
@@ -121,6 +133,17 @@ public class Main {
             entryDAO.updateTitle(newTitle);
             entryDAO.updateText(newText);
             res.redirect("/index/" + entry.getSlug());
+            return null;
+        });
+
+        //delete the page
+        get("/index/:slug/delete", (req, res) -> {
+            BlogEntry entry = blogDAO.findBySlug(req.params("slug"));
+            boolean result = blogDAO.remove(entry);
+            System.out.println(result);
+            //TODO: resolve bug where entries are mysteriously not deleted once a new comment has been added
+            //TODO: (extra) display some sort of warning or confirmation dialog before deleting
+            res.redirect("/");
             return null;
         });
 
@@ -136,6 +159,14 @@ public class Main {
             return null;
         });
 
+        /**** EXCEPTIONS ****/
+
+        exception(NotFoundException.class, (exc, req, res) -> {
+            res.status(404);
+            HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
+            String html = engine.render(new ModelAndView(null, "not-found.hbs"));
+            res.body(html);
+        });
     }
 
 }

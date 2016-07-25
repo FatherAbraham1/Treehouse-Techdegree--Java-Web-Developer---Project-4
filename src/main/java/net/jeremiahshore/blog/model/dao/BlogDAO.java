@@ -1,4 +1,4 @@
-package net.jeremiahshore.blog.model;
+package net.jeremiahshore.blog.model.dao;
 
 import net.jeremiahshore.blog.model.BlogEntry;
 
@@ -13,4 +13,6 @@ public interface BlogDAO {
     Set<BlogEntry> findAll();
 
     BlogEntry findBySlug(String slug);
+
+    boolean remove(BlogEntry entry);
 }
